@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -9,8 +18,7 @@ import { Task } from './task.entity';
 @ApiTags('tasks')
 @Controller('tasks')
 export class TasksController {
-  constructor(private tasksService: TasksService) {
-  }
+  constructor(private tasksService: TasksService) {}
 
   @Get()
   getTasks(@Query() filterDto: GetTasksFilterDto): Promise<Task[]> {
@@ -23,9 +31,7 @@ export class TasksController {
   }
 
   @Post()
-  createTask(
-    @Body() createTaskDto: CreateTaskDto
-  ): Promise<Task> {
+  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
     return this.tasksService.createTask(createTaskDto);
   }
 

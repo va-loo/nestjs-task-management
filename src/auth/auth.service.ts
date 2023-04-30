@@ -11,14 +11,14 @@ export class AuthService {
   ) {}
 
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    return this.usersRepository.createUser(authCredentialsDto)
+    return this.usersRepository.createUser(authCredentialsDto);
   }
 
   async signIn({ username, password }: AuthCredentialsDto): Promise<string> {
-    const user = await this.usersRepository.findOne({ username });
+    const user = await this.usersRepository.findOneByOrFail({ username });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      return 'success'
+      return 'success';
     } else {
       throw new UnauthorizedException();
     }
