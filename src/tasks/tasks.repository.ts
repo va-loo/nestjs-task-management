@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import {DataSource, Repository} from 'typeorm';
 import { Task } from './task.entity';
 import { TaskStatus } from './task-status.enuml';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -7,6 +7,9 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class TasksRepository extends Repository<Task> {
+  constructor(private dataSource: DataSource) {
+    super(Task, dataSource.createEntityManager());
+  }
   async getTasks({ status, search }: GetTasksFilterDto): Promise<Task[]> {
     const query = this.createQueryBuilder('task');
 
