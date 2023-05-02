@@ -10,8 +10,8 @@ import { JwtPayload } from './jwt.payload';
 export class AuthService {
   constructor(
     @InjectRepository(UsersRepository)
-    private usersRepository: UsersRepository,
-    private jwtService: JwtService,
+    private readonly usersRepository: UsersRepository,
+    private readonly jwtService: JwtService,
   ) {}
 
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
@@ -26,7 +26,7 @@ export class AuthService {
 
     if (user && (await compare(password, user.password))) {
       const payload: JwtPayload = { username };
-      const accessToken = await this.jwtService.sign(payload);
+      const accessToken = this.jwtService.sign(payload);
       return { accessToken };
     } else {
       throw new UnauthorizedException();

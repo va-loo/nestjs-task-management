@@ -10,7 +10,8 @@ import { User } from '../auth/user.entity';
 @Injectable()
 export class TasksService {
   constructor(
-    @InjectRepository(TasksRepository) private tasksRepository: TasksRepository,
+    @InjectRepository(TasksRepository)
+    private readonly tasksRepository: TasksRepository,
   ) {}
 
   getTasks(filterDto: GetTasksFilterDto, user: User): Promise<Task[]> {

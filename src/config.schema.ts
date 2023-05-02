@@ -1,11 +1,11 @@
-import * as Joi from '@hapi/joi';
+import { object, string, number } from '@hapi/joi';
 
-export const configValidationSchema = Joi.object({
-  STAGE: Joi.string().required(),
-  DB_HOST: Joi.string().required(),
-  DB_PORT: Joi.number().default(5432).required(),
-  DB_USERNAME: Joi.string().required(),
-  DB_PASSWORD: Joi.string().required(),
-  DB_DATABASE: Joi.string().required(),
-  JWT_SECRET: Joi.string().required(),
+export const configValidationSchema = object({
+  STAGE: string().required(),
+  DB_HOST: string().required(),
+  DB_PORT: number().default(5432).required(),
+  DB_USERNAME: string().required(),
+  DB_PASSWORD: string().required(),
+  DB_DATABASE: string().required(),
+  JWT_SECRET: string().required(),
 });

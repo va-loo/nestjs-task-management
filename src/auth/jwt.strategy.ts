@@ -11,8 +11,8 @@ import { User } from './user.entity';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     @InjectRepository(UsersRepository)
-    private usersRepository: UsersRepository,
-    private configService: ConfigService,
+    private readonly usersRepository: UsersRepository,
+    private readonly configService: ConfigService,
   ) {
     super({
       secretOrKey: configService.get('JWT_SECRET'),
